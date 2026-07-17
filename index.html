@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ศูนย์รวมใบรับรอง — Marine Servitec</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F2EDE1;
+    --paper-dark:#E8E0CE;
+    --ink:#1B2A41;
+    --ink-soft:#4A5568;
+    --teal:#2F6F6B;
+    --teal-dark:#234f4c;
+    --stamp:#B23B2E;
+    --steel:#8B93A0;
+    --line: rgba(27,42,65,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(47,111,107,0.08), transparent 60%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    min-height:100vh;
+    padding:48px 20px 80px;
+  }
+  .wrap{max-width:920px;margin:0 auto;}
+
+  header{
+    border-bottom:2px solid var(--ink);
+    padding-bottom:22px;
+    margin-bottom:38px;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .brand-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--teal-dark);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:'Archivo Black',sans-serif;
+    font-size:clamp(28px,4vw,42px);
+    line-height:1.05;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .manifest-no{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    text-align:right;
+  }
+  .manifest-no span{display:block;}
+  .manifest-no .date{color:var(--steel);margin-top:2px;}
+
+  .lead{
+    color:var(--ink-soft);
+    font-size:15px;
+    line-height:1.7;
+    max-width:60ch;
+    margin-bottom:36px;
+  }
+
+  .search-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:28px;
+  }
+  .search-row input{
+    flex:1;
+    padding:13px 16px;
+    border:1.5px solid var(--ink);
+    background:#fff;
+    border-radius:3px;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    color:var(--ink);
+    outline:none;
+  }
+  .search-row input:focus{border-color:var(--teal);}
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+    gap:18px;
+  }
+
+  .card{
+    position:relative;
+    background:#fff;
+    border:1.5px solid var(--ink);
+    border-radius:4px;
+    padding:24px 22px 20px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    transition:transform .16s ease, box-shadow .16s ease;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    left:0;top:0;bottom:0;
+    width:5px;
+    background:var(--teal);
+  }
+  .card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 24px rgba(27,42,65,0.12);
+  }
+
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .form-code{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.06em;
+    color:var(--steel);
+  }
+  .stamp{
+    flex-shrink:0;
+    width:46px;height:46px;
+    border-radius:50%;
+    border:2px solid var(--stamp);
+    color:var(--stamp);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    text-align:center;
+    transform:rotate(-8deg);
+    line-height:1.15;
+  }
+
+  .card h2{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:19px;
+    margin:0;
+    color:var(--ink);
+  }
+  .card p{
+    margin:0;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.6;
+    flex-grow:1;
+  }
+
+  .card-foot{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:6px;
+    padding-top:14px;
+    border-top:1px solid var(--line);
+  }
+  .open-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    background:var(--ink);
+    color:var(--paper);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    padding:9px 16px;
+    border-radius:3px;
+    transition:background .15s ease;
+  }
+  .open-btn:hover{background:var(--teal-dark);}
+  .open-btn svg{width:13px;height:13px;}
+
+  .updated{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    color:var(--steel);
+  }
+
+  .empty-state{
+    display:none;
+    text-align:center;
+    padding:50px 20px;
+    color:var(--steel);
+    font-size:14px;
+  }
+
+  footer{
+    margin-top:56px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-size:12px;
+    color:var(--steel);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  @media(max-width:480px){
+    header{flex-direction:column;align-items:flex-start;}
+    .manifest-no{text-align:left;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div>
+      <p class="brand-eyebrow">Marine Servitec Co., Ltd.</p>
+      <h1>ศูนย์รวมใบรับรอง</h1>
+    </div>
+    <div class="manifest-no">
+      <span>INTERNAL USE ONLY</span>
+      <span class="date" id="today-date"></span>
+    </div>
+  </header>
+
+  <p class="lead">รวมลิงก์เครื่องมือสร้างใบรับรองทุกประเภทไว้ในที่เดียว เลือกฟอร์มที่ต้องการแล้วกดเปิดใช้งานได้ทันที ไม่ต้องจำลิงก์แยกแต่ละแบบ</p>
+
+  <div class="search-row">
+    <input type="text" id="search" placeholder="ค้นหาใบรับรอง เช่น EEBD, ถังดับเพลิง...">
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <p class="empty-state" id="empty-state">ไม่พบใบรับรองที่ตรงกับคำค้นหา</p>
+
+  <footer>
+    <span id="count-label"></span>
+    <span>อัปเดตรายการได้ในไฟล์ index.html — array "CERTS"</span>
+  </footer>
+
+</div>
+
+<script>
+  // เพิ่มใบรับรองใหม่ได้ที่นี่ — เติม object ในลิสต์นี้แล้ว deploy ใหม่
+  const CERTS = [
+    {
+      code: "FR-SE-11",
+      title: "EEBD Certificate",
+      desc: "ใบรับรองอุปกรณ์ช่วยหายใจฉุกเฉิน (Emergency Escape Breathing Device) — ชุด Hood และถังอากาศ",
+      url: "https://serviteccertificate.github.io/EEBD-CERTIFICATE/",
+      stamp: "EEBD",
+      updated: "อัปเดตล่าสุด: เม.ย. 2024"
+    },
+    {
+      code: "FR-SE-—",
+      title: "Portable Fire Extinguisher Certificate",
+      desc: "ใบรับรองการตรวจสอบและบำรุงรักษาถังดับเพลิงมือถือประจำเรือ",
+      url: "https://serviteccertificate.github.io/PORTABLE-FIRE-EXTINGUISHER-CERTIFICATE/",
+      stamp: "FFE",
+      updated: "อัปเดตล่าสุด: 2024"
+    }
+  ];
+
+  const grid = document.getElementById('grid');
+  const emptyState = document.getElementById('empty-state');
+  const countLabel = document.getElementById('count-label');
+  const search = document.getElementById('search');
+
+  function render(list){
+    grid.innerHTML = '';
+    if(list.length === 0){
+      emptyState.style.display = 'block';
+    } else {
+      emptyState.style.display = 'none';
+    }
+    list.forEach(c => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="form-code">${c.code}</span>
+          <div class="stamp">${c.stamp}</div>
+        </div>
+        <h2>${c.title}</h2>
+        <p>${c.desc}</p>
+        <div class="card-foot">
+          <span class="updated">${c.updated}</span>
+          <a class="open-btn" href="${c.url}" target="_blank" rel="noopener">
+            เปิดใช้งาน
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+          </a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+    countLabel.textContent = `แสดง ${list.length} จาก ${CERTS.length} รายการ`;
+  }
+
+  search.addEventListener('input', () => {
+    const q = search.value.trim().toLowerCase();
+    const filtered = CERTS.filter(c =>
+      c.title.toLowerCase().includes(q) ||
+      c.desc.toLowerCase().includes(q) ||
+      c.code.toLowerCase().includes(q)
+    );
+    render(filtered);
+  });
+
+  document.getElementById('today-date').textContent = new Date().toLocaleDateString('th-TH', { year:'numeric', month:'long', day:'numeric' });
+
+  render(CERTS);
+</script>
+</body>
+</html>
